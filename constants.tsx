@@ -12,24 +12,24 @@ export const PROJECTS: Project[] = [
     id: 1,
     title: "EXPENSE TRACKER",
     description: "A web application to track and visualize personal expenses with real-time updates.",
-    tags: ["React", "D3.js", "Tensorflow"],
-    link: "#",
+    tags: ["Vue", "PHP", "JavaScript", "CSS", "HTML", "Blade", "Batchfile", "MySQL"],
+    link: "https://dimgrey-bison-569365.hostingersite.com/",
     status: "COMPLETED"
   },
   {
     id: 2,
     title: "HOSPITAL APPOINTMENT SYSTEM",
     description: "A web application to manage and schedule hospital appointments efficiently.",
-    tags: ["WebSockets", "Three.js", "Tailwind"],
+    tags: ["PHP", "HTML", "TypeScript", "CSS", "Batchfile", "MySQL"],
     link: "#",
-    status: "COMPLETED"
+    status: "IN-PROGRESS"
   },
   {
     id: 3,
     title: "WORK APPLICATION TRACKER",
     description: "A tool to help users track their job applications and interviews in one place.",
-    tags: ["Node.js", "OpenAI", "React"],
-    link: "#",
+    tags: ["TypeScript", "Batchfile", "CSS", "Javascript", "MySQL"],
+    link: "https://blanchedalmond-salamander-962993.hostingersite.com/",
     status: "COMPLETED"
   }
 ];

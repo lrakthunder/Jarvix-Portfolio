@@ -7,7 +7,7 @@ export interface Project {
   description: string;
   tags: string[];
   link: string;
-  status: 'COMPLETED' | 'IN_PROGRESS' | 'ARCHIVED';
+  status: 'COMPLETED' | 'IN-PROGRESS' | 'ARCHIVED' | 'FOR DEPLOYMENT';
 }
 
 export interface ExperienceItem {

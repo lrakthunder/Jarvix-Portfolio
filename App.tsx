@@ -44,7 +44,7 @@ const App: React.FC = () => {
           <div className="flex flex-col md:flex-row items-center justify-between px-6 pt-4 border-b border-cyan-500/10">
             <div className="flex flex-col items-start mb-4 md:mb-0">
               <h1 className={`text-2xl md:text-3xl font-orbitron font-black tracking-tighter ${theme === 'dark' ? 'text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]' : 'text-blue-700'}`}>
-                ARCHITECT_X <span className="text-xs font-light text-cyan-600/50">v4.0.2</span>
+                KARL GILBERT <span className="text-xs font-light text-cyan-600/50">v4.0.2</span>
               </h1>
               <span className="text-[10px] font-mono opacity-50">LOCATION: 7.097370° N, 124.867085° W</span>
             </div>
@@ -175,7 +175,7 @@ const App: React.FC = () => {
 
           {/* Footer Bar */}
           <div className="flex justify-between items-center px-6 py-2 border-t border-cyan-500/10 text-[10px] font-mono tracking-widest opacity-40">
-            <span>© 2024 SYSTEM_ARCHITECT</span>
+            <span>© 2026 KARL GILBERT PASCUAL</span>
             <div className="flex gap-4">
               <span className="animate-pulse">THUNDER_NET CONNECTED</span>
             </div>

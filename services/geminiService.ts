@@ -2,7 +2,7 @@
 import { GoogleGenAI } from "@google/genai";
 import { USER_BIO } from "../constants";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_API_KEY || '' });
 
 export const askJarvis = async (query: string) => {
   try {

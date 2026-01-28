@@ -3,8 +3,17 @@ import React from 'react';
 import { Project } from '../types';
 
 export const ProjectCard: React.FC<{ project: Project, isDark: boolean }> = ({ project, isDark }) => {
+  const handleClick = () => {
+    if (project.link && project.link !== '#') {
+      window.open(project.link, '_blank', 'noopener,noreferrer');
+    }
+  };
+
   return (
-    <div className={`group relative p-6 border ${isDark ? 'border-cyan-500/20 hover:border-cyan-400 bg-cyan-900/10' : 'border-blue-500/20 hover:border-blue-500 bg-blue-50'} transition-all duration-300 cursor-pointer overflow-hidden`}>
+    <div 
+      onClick={handleClick}
+      className={`group relative p-6 border ${isDark ? 'border-cyan-500/20 hover:border-cyan-400 bg-cyan-900/10' : 'border-blue-500/20 hover:border-blue-500 bg-blue-50'} transition-all duration-300 ${project.link !== '#' ? 'cursor-pointer' : 'cursor-default'} overflow-hidden`}
+    >
       <div className="absolute top-0 right-0 px-2 py-0.5 bg-cyan-500/20 text-[8px] font-mono tracking-tighter text-cyan-400">
         ID: {project.id.toString().padStart(4, '0')}
       </div>
