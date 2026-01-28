@@ -1,0 +1,7 @@
+{
+  "name": "JARVIX Portfolio HUD",
+  "description": "A futuristic, JARVIX-inspired portfolio website featuring a holographic HUD interface, interactive data visualizations, and an AI-assisted overview powered by Gemini.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
