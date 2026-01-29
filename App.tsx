@@ -240,7 +240,7 @@ const App: React.FC = () => {
                       karlgilbertpascual@gmail.com 
                     </span>
                     <span className={`text-xs font-mono ${theme === 'dark' ? 'text-cyan-400' : 'text-blue-600'}`}>
-                      +63 975 752 2026
+                      +63 975 7522 026
                     </span>
                   </div>
 
