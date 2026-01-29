@@ -1,8 +1,8 @@
 
 import React from 'react';
-import { ExperienceItem } from '../types';
+import { JourneyItem } from '../types';
 
-export const ExperienceItemComponent: React.FC<{ item: ExperienceItem, isDark: boolean }> = ({ item, isDark }) => {
+export const JourneyItemComponent: React.FC<{ item: JourneyItem, isDark: boolean }> = ({ item, isDark }) => {
   return (
     <div className="relative pl-12 group">
       {/* Connector Line */}

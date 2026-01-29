@@ -1,5 +1,5 @@
 
-export type Section = 'overview' | 'projects' | 'experience' | 'background';
+export type Section = 'overview' | 'projects' | 'journey' | 'background' | 'contact';
 
 export interface Project {
   id: number;
@@ -10,7 +10,7 @@ export interface Project {
   status: 'COMPLETED' | 'IN-PROGRESS' | 'ARCHIVED' | 'FOR DEPLOYMENT';
 }
 
-export interface ExperienceItem {
+export interface JourneyItem {
   id: number;
   role: string;
   company: string;

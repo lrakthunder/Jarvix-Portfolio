@@ -2,12 +2,12 @@
 import React, { useState, useEffect } from 'react';
 import { HUDFrame } from './components/HUDFrame';
 import { Navigation } from './components/Navigation';
-import { Section, Project, ExperienceItem, Skill } from './types';
+import { Section, Project, JourneyItem, Skill } from './types';
 import { ProjectCard } from './components/ProjectCard';
-import { ExperienceItemComponent } from './components/ExperienceItem';
+import { JourneyItemComponent } from './components/ExperienceItem';
 import { JarvisChat } from './components/JarvisChat';
 import { ContactModal } from './components/ContactModal';
-import { PROJECTS, EXPERIENCE, SKILLS, USER_BIO } from './constants';
+import { PROJECTS, JOURNEY, SKILLS, USER_BIO } from './constants';
 
 const App: React.FC = () => {
   const [activeSection, setActiveSection] = useState<Section>('overview');
@@ -18,6 +18,34 @@ const App: React.FC = () => {
   useEffect(() => {
     const timer = setTimeout(() => setSystemLoading(false), 2000);
     return () => clearTimeout(timer);
+  }, []);
+
+  // Scroll spy to detect active section
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['overview', 'projects', 'journey', 'background', 'contact'] as Section[];
+      const scrollContainer = document.getElementById('scroll-container');
+      
+      if (!scrollContainer) return;
+      
+      const scrollPosition = scrollContainer.scrollTop + 120; // offset to match scroll-to positioning
+      
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const { offsetTop, offsetHeight } = element;
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
+    };
+
+    const scrollContainer = document.getElementById('scroll-container');
+    scrollContainer?.addEventListener('scroll', handleScroll);
+    
+    return () => scrollContainer?.removeEventListener('scroll', handleScroll);
   }, []);
 
   const toggleTheme = () => setTheme(prev => prev === 'dark' ? 'light' : 'dark');
@@ -38,13 +66,13 @@ const App: React.FC = () => {
       <div className="fixed inset-0 hologram-grid opacity-20 pointer-events-none"></div>
       <div className="scanline"></div>
 
-      <div className="w-full max-w-7xl h-[90vh] relative z-20">
+      <div className="w-full h-[90vh] relative z-20 pr-24">
         <HUDFrame theme={theme}>
           {/* Header Area */}
           <div className="flex flex-col md:flex-row items-center justify-between px-6 pt-4 border-b border-cyan-500/10">
             <div className="flex flex-col items-start mb-4 md:mb-0">
               <h1 className={`text-2xl md:text-3xl font-orbitron font-black tracking-tighter ${theme === 'dark' ? 'text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]' : 'text-blue-700'}`}>
-                KARL GILBERT <span className="text-xs font-light text-cyan-600/50">v4.0.2</span>
+                KARL PASCUAL <span className="text-xs font-light text-cyan-600/50">v4.0.2</span>
               </h1>
               <span className="text-[10px] font-mono opacity-50">LOCATION: 7.097370° N, 124.867085° W</span>
             </div>
@@ -66,14 +94,15 @@ const App: React.FC = () => {
           </div>
 
           {/* Main Content Scroll Area */}
-          <div className="flex-1 overflow-y-auto px-6 md:px-12 py-8 custom-scrollbar">
-            {activeSection === 'overview' && (
+          <div id="scroll-container" className="flex-1 overflow-y-auto px-6 md:px-12 py-8 custom-scrollbar scroll-smooth">
+            {/* Overview Section */}
+            <section id="overview" className="min-h-screen pb-16">
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 animate-[fadeIn_0.5s_ease-out]">
                 <div className="lg:col-span-2 space-y-8">
                   <div className={`p-8 border-l-4 ${theme === 'dark' ? 'border-cyan-500 bg-cyan-950/20' : 'border-blue-600 bg-blue-50'} relative overflow-hidden`}>
                     <h2 className="text-4xl md:text-6xl font-orbitron font-black mb-4 leading-tight">
                       BUILDING THE <br/>
-                      <span className={`${theme === 'dark' ? 'text-cyan-400' : 'text-blue-700'}`}>DIGITAL FRONTIER.</span>
+                      <span className={`${theme === 'dark' ? 'text-cyan-400' : 'text-blue-700'}`}>DIGITAL FRONTIER</span>
                     </h2>
                     <p className={`text-lg md:text-xl font-light max-w-2xl leading-relaxed text-justify ${theme === 'dark' ? 'text-cyan-100/80' : 'text-gray-700'}`}>
                       {USER_BIO}
@@ -117,25 +146,37 @@ const App: React.FC = () => {
                    <JarvisChat isDark={theme === 'dark'} />
                 </div>
               </div>
-            )}
+            </section>
 
-            {activeSection === 'projects' && (
+            {/* Projects Section */}
+            <section id="projects" className="min-h-screen pb-16">
+              <h2 className={`text-3xl font-orbitron font-black mb-8 tracking-wide ${theme === 'dark' ? 'text-cyan-400' : 'text-blue-700'}`}>
+                PROJECTS
+              </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-[fadeIn_0.5s_ease-out]">
                 {PROJECTS.map(p => (
                   <ProjectCard key={p.id} project={p} isDark={theme === 'dark'} />
                 ))}
               </div>
-            )}
+            </section>
 
-            {activeSection === 'experience' && (
+            {/* Journey Section */}
+            <section id="journey" className="min-h-screen pb-16">
+              <h2 className={`text-3xl font-orbitron font-black mb-8 tracking-wide ${theme === 'dark' ? 'text-cyan-400' : 'text-blue-700'}`}>
+                JOURNEY
+              </h2>
               <div className="max-w-4xl mx-auto space-y-12 animate-[fadeIn_0.5s_ease-out]">
-                {EXPERIENCE.map(item => (
-                  <ExperienceItemComponent key={item.id} item={item} isDark={theme === 'dark'} />
+                {JOURNEY.map(item => (
+                  <JourneyItemComponent key={item.id} item={item} isDark={theme === 'dark'} />
                 ))}
               </div>
-            )}
+            </section>
 
-            {activeSection === 'background' && (
+            {/* Background Section */}
+            <section id="background" className="min-h-screen pb-16">
+              <h2 className={`text-3xl font-orbitron font-black mb-8 tracking-wide ${theme === 'dark' ? 'text-cyan-400' : 'text-blue-700'}`}>
+                BACKGROUND
+              </h2>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 animate-[fadeIn_0.5s_ease-out]">
                 <div className="space-y-8">
                   <h3 className="text-xl font-orbitron font-bold border-b border-cyan-500/30 pb-2">TECHNICAL SKILLS</h3>
@@ -164,13 +205,131 @@ const App: React.FC = () => {
                   <h3 className="text-xl font-orbitron font-bold border-b border-cyan-500/30 pb-2">EDUCATIONAL BACKGROUND</h3>
                   <div className={`p-6 border ${theme === 'dark' ? 'border-cyan-500/20 bg-cyan-950/20' : 'border-blue-200 bg-white'}`}>
                     <h4 className="text-lg font-orbitron text-cyan-400 mb-1">B.S. COMPUTER SCIENCE</h4>
-                    <p className="text-xs font-mono opacity-60 mb-4">UNIVERSITY OF SOUTHERN MINDANAO • 2013-2018</p>
+                    <p className="text-xs font-mono opacity-60 mb-1">UNIVERSITY OF SOUTHERN MINDANAO • 2013-2018</p>
+                    <p className="text-xs font-mono opacity-60 mb-6">Kabacan, North Cotabato, Philippines</p>
                     <h4 className="text-lg font-orbitron text-cyan-400 mb-1">PRIMARY AND SECONDARY EDUCATION</h4>
-                    <p className="text-xs font-mono opacity-60 mb-4">NOTRE DAME OF KABACAN • 2003-2013</p>
+                    <p className="text-xs font-mono opacity-60 mb-1">NOTRE DAME OF KABACAN • 2003-2013</p>
+                    <p className="text-xs font-mono opacity-60">Kabacan, North Cotabato, Philippines</p>
                   </div>
                 </div>
               </div>
-            )}
+            </section>
+
+            {/* Contact Section */}
+            <section id="contact" className="min-h-screen pb-16">
+              <h2 className={`text-3xl font-orbitron font-black mb-8 tracking-wide ${theme === 'dark' ? 'text-cyan-400' : 'text-blue-700'}`}>
+                CONTACT
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-[fadeIn_0.5s_ease-out] max-w-5xl mx-auto">
+                {/* Email Card */}
+                <div className={`group relative p-6 border ${theme === 'dark' ? 'border-cyan-500/20 hover:border-cyan-400 bg-cyan-900/10' : 'border-blue-500/20 hover:border-blue-500 bg-blue-50'} transition-all duration-300 overflow-hidden`}>
+                  <div className="absolute top-0 right-0 px-2 py-0.5 bg-cyan-500/20 text-[8px] font-mono tracking-tighter text-cyan-400">
+                    ID: 0001
+                  </div>
+                  
+                  <h3 className={`text-lg font-orbitron font-bold mb-2 tracking-wide ${theme === 'dark' ? 'text-cyan-300' : 'text-blue-800'}`}>
+                    Email or Phone
+                  </h3>
+                  
+                  <p className={`text-sm mb-4 leading-relaxed ${theme === 'dark' ? 'text-cyan-100/70' : 'text-gray-600'}`}>
+                    Let's discuss your project. Feel free to reach out via email or click the button on the lower right to send a message.
+                  </p>
+                  
+                  <div className="flex flex-col gap-2 mt-auto pt-4 border-t border-cyan-500/10">
+                    <span className={`text-xs font-mono ${theme === 'dark' ? 'text-cyan-400' : 'text-blue-600'}`}>
+                      karlgilbertpascual@gmail.com 
+                    </span>
+                    <span className={`text-xs font-mono ${theme === 'dark' ? 'text-cyan-400' : 'text-blue-600'}`}>
+                      +63 975 752 2026
+                    </span>
+                  </div>
+
+                  {/* Decorative Scanning Line for hover */}
+                  <div className="absolute inset-0 bg-cyan-400/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                    <div className="h-px w-full bg-cyan-400/50 absolute top-0 animate-[scanline_4s_linear_infinite]"></div>
+                  </div>
+                </div>
+
+                {/* Location Card */}
+                <div className={`group relative p-6 border ${theme === 'dark' ? 'border-cyan-500/20 hover:border-cyan-400 bg-cyan-900/10' : 'border-blue-500/20 hover:border-blue-500 bg-blue-50'} transition-all duration-300 overflow-hidden`}>
+                  <div className="absolute top-0 right-0 px-2 py-0.5 bg-cyan-500/20 text-[8px] font-mono tracking-tighter text-cyan-400">
+                    ID: 0002
+                  </div>
+                  
+                  <h3 className={`text-lg font-orbitron font-bold mb-2 tracking-wide ${theme === 'dark' ? 'text-cyan-300' : 'text-blue-800'}`}>
+                    Location
+                  </h3>
+                  
+                  <p className={`text-sm mb-4 leading-relaxed ${theme === 'dark' ? 'text-cyan-100/70' : 'text-gray-600'}`}>
+                    Based in Philippines
+                  </p>
+                  
+                  <div className="flex items-center justify-between mt-auto pt-4 border-t border-cyan-500/10">
+                    <span className={`text-xs font-mono ${theme === 'dark' ? 'text-cyan-400' : 'text-blue-600'}`}>
+                      Available for remote work
+                    </span>
+                  </div>
+
+                  {/* Decorative Scanning Line for hover */}
+                  <div className="absolute inset-0 bg-cyan-400/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                    <div className="h-px w-full bg-cyan-400/50 absolute top-0 animate-[scanline_4s_linear_infinite]"></div>
+                  </div>
+                </div>
+
+                {/* Availability Card */}
+                <div className={`group relative p-6 border ${theme === 'dark' ? 'border-cyan-500/20 hover:border-cyan-400 bg-cyan-900/10' : 'border-blue-500/20 hover:border-blue-500 bg-blue-50'} transition-all duration-300 overflow-hidden`}>
+                  <div className="absolute top-0 right-0 px-2 py-0.5 bg-cyan-500/20 text-[8px] font-mono tracking-tighter text-cyan-400">
+                    ID: 0003
+                  </div>
+                  
+                  <h3 className={`text-lg font-orbitron font-bold mb-2 tracking-wide ${theme === 'dark' ? 'text-cyan-300' : 'text-blue-800'}`}>
+                    Availability
+                  </h3>
+                  
+                  <p className={`text-sm mb-4 leading-relaxed ${theme === 'dark' ? 'text-cyan-100/70' : 'text-gray-600'}`}>
+                    Currently Available. Ready for new projects.
+                  </p>
+                  
+                  <div className="flex items-center justify-between mt-auto pt-4 border-t border-cyan-500/10">
+                    <span className={`text-xs font-mono ${theme === 'dark' ? 'text-cyan-400' : 'text-blue-600'}`}>
+                      Open to opportunities
+                    </span>
+                  </div>
+
+                  {/* Decorative Scanning Line for hover */}
+                  <div className="absolute inset-0 bg-cyan-400/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                    <div className="h-px w-full bg-cyan-400/50 absolute top-0 animate-[scanline_4s_linear_infinite]"></div>
+                  </div>
+                </div>
+              </div>
+              <br />
+              <br />
+              <h3 className={`text-xl font-orbitron font-bold mb-4 tracking-wide ${theme === 'dark' ? 'text-cyan-300' : 'text-blue-800'}`}>
+                Achievements
+              </h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className={`p-4 border ${theme === 'dark' ? 'border-cyan-500/20 bg-cyan-900/10' : 'border-blue-200 bg-white'} text-center`}>
+                  {/* <div className="text-xl">✨</div> */}
+                  <div className={`text-2xl font-orbitron font-bold ${theme === 'dark' ? 'text-cyan-300' : 'text-blue-800'}`}>6</div>
+                  <div className={`text-xs font-mono uppercase ${theme === 'dark' ? 'text-cyan-100/70' : 'text-gray-600'}`}>Years Experience</div>
+                </div>
+                <div className={`p-4 border ${theme === 'dark' ? 'border-cyan-500/20 bg-cyan-900/10' : 'border-blue-200 bg-white'} text-center`}>
+                  {/* <div className="text-xl">💫</div> */}
+                  <div className={`text-2xl font-orbitron font-bold ${theme === 'dark' ? 'text-cyan-300' : 'text-blue-800'}`}>12+</div>
+                  <div className={`text-xs font-mono uppercase ${theme === 'dark' ? 'text-cyan-100/70' : 'text-gray-600'}`}>Projects Completed</div>
+                </div>
+                <div className={`p-4 border ${theme === 'dark' ? 'border-cyan-500/20 bg-cyan-900/10' : 'border-blue-200 bg-white'} text-center`}>
+                  {/* <div className="text-xl">⭐</div> */}
+                  <div className={`text-2xl font-orbitron font-bold ${theme === 'dark' ? 'text-cyan-300' : 'text-blue-800'}`}>15+</div>
+                  <div className={`text-xs font-mono uppercase ${theme === 'dark' ? 'text-cyan-100/70' : 'text-gray-600'}`}>Technologies</div>
+                </div>
+                <div className={`p-4 border ${theme === 'dark' ? 'border-cyan-500/20 bg-cyan-900/10' : 'border-blue-200 bg-white'} text-center`}>
+                  {/* <div className="text-xl">❄️</div> */}
+                  <div className={`text-2xl font-orbitron font-bold ${theme === 'dark' ? 'text-cyan-300' : 'text-blue-800'}`}>100%</div>
+                  <div className={`text-xs font-mono uppercase ${theme === 'dark' ? 'text-cyan-100/70' : 'text-gray-600'}`}>Client Satisfaction</div>
+                </div>
+              </div>
+            </section>
           </div>
 
           {/* Footer Bar */}

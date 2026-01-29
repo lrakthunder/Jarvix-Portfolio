@@ -45,7 +45,7 @@ export const ProjectCard: React.FC<{ project: Project, isDark: boolean }> = ({ p
 
       {/* Decorative Scanning Line for hover */}
       <div className="absolute inset-0 bg-cyan-400/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-          <div className="h-px w-full bg-cyan-400/50 absolute top-0 animate-[scanline_2s_linear_infinite]"></div>
+          <div className="h-px w-full bg-cyan-400/50 absolute top-0 animate-[scanline_4s_linear_infinite]"></div>
       </div>
     </div>
   );

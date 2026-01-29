@@ -1,10 +1,10 @@
 
 import React from 'react';
-import { Project, ExperienceItem, Skill } from './types';
+import { Project, JourneyItem, Skill } from './types';
 
 export const USER_BIO = `
 Hi, I’m Karl Gilbert Pascual, a Full Stack Engineer specializing in high-performance web applications with immersive user interfaces. 
-Skilled in React, TypeScript, and Laravel, I’m dedicated to crafting innovative solutions that push the boundaries of what the web can do.
+Skilled in React, Vue, Javascript, TypeScript, and Laravel/PHP, I’m dedicated to crafting innovative solutions that push the boundaries of what the web can do.
 `;
 
 export const PROJECTS: Project[] = [
@@ -34,10 +34,10 @@ export const PROJECTS: Project[] = [
   }
 ];
 
-export const EXPERIENCE: ExperienceItem[] = [
+export const JOURNEY: JourneyItem[] = [
   {
     id: 1,
-    role: "Junior Developer",
+    role: "Full Stack Developer",
     company: "R2M IT Solutions, Inc.",
     full_period: "August 2023 - January 2026",
     period: "2026",
