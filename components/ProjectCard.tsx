@@ -2,28 +2,21 @@
 import React from 'react';
 import { Project } from '../types';
 
-export const ProjectCard: React.FC<{ project: Project, isDark: boolean }> = ({ project, isDark }) => {
-  const handleClick = () => {
-    if (project.link && project.link !== '#') {
-      window.open(project.link, '_blank', 'noopener,noreferrer');
-    }
-  };
+export const ProjectCard: React.FC<{ project: Project; isDark: boolean; onOpen?: (p: Project) => void }> = ({ project, isDark, onOpen }) => {
 
   return (
     <div 
-      onClick={handleClick}
-      className={`group relative p-6 border ${isDark ? 'border-cyan-500/20 hover:border-cyan-400 bg-cyan-900/10' : 'border-blue-500/20 hover:border-blue-500 bg-blue-50'} transition-all duration-300 ${project.link !== '#' ? 'cursor-pointer' : 'cursor-default'} overflow-hidden`}
-    >
+      className={`group relative p-6 border ${isDark ? 'border-cyan-500/20 hover:border-cyan-400 bg-cyan-900/10' : 'border-blue-500/20 hover:border-blue-500 bg-blue-50'} transition-all duration-300 overflow-hidden`}>
       <div className="absolute top-0 right-0 px-2 py-0.5 bg-cyan-500/20 text-[8px] font-mono tracking-tighter text-cyan-400">
         ID: {project.id.toString().padStart(4, '0')}
       </div>
       
       <h3 className={`text-lg font-orbitron font-bold mb-2 tracking-wide ${isDark ? 'text-cyan-300' : 'text-blue-800'}`}>
-        {project.title}
+        {project.card_title ?? project.title}
       </h3>
       
       <p className={`text-sm mb-4 leading-relaxed ${isDark ? 'text-cyan-100/70' : 'text-gray-600'}`}>
-        {project.description}
+        {project.card_description ?? project.description}
       </p>
       
       <div className="flex flex-wrap gap-2 mb-4">
@@ -38,7 +31,7 @@ export const ProjectCard: React.FC<{ project: Project, isDark: boolean }> = ({ p
         <span className={`text-[10px] font-orbitron ${project.status === 'COMPLETED' ? 'text-green-400' : 'text-yellow-400'}`}>
           STATUS: {project.status}
         </span>
-        <button className={`text-xs font-orbitron p-1 hover:underline ${isDark ? 'text-cyan-400' : 'text-blue-600'}`}>
+        <button onClick={() => onOpen?.(project)} className={`text-xs font-orbitron p-1 hover:underline ${isDark ? 'text-cyan-400' : 'text-blue-600'}`}>
           ACCESS MODULE &gt;
         </button>
       </div>

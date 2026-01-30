@@ -7,12 +7,14 @@ import { ProjectCard } from './components/ProjectCard';
 import { JourneyItemComponent } from './components/ExperienceItem';
 import { JarvisChat } from './components/JarvisChat';
 import { ContactModal } from './components/ContactModal';
+import ProjectModal from './components/ProjectModal';
 import { PROJECTS, JOURNEY, SKILLS, USER_BIO } from './constants';
 
 const App: React.FC = () => {
   const [activeSection, setActiveSection] = useState<Section>('overview');
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
   const [isContactOpen, setIsContactOpen] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [systemLoading, setSystemLoading] = useState(true);
 
   useEffect(() => {
@@ -155,7 +157,7 @@ const App: React.FC = () => {
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-[fadeIn_0.5s_ease-out]">
                 {PROJECTS.map(p => (
-                  <ProjectCard key={p.id} project={p} isDark={theme === 'dark'} />
+                  <ProjectCard key={p.id} project={p} isDark={theme === 'dark'} onOpen={(proj) => setSelectedProject(proj)} />
                 ))}
               </div>
             </section>
@@ -183,7 +185,7 @@ const App: React.FC = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {['CORE', 'FRONTEND', 'BACKEND', 'TOOLS'].map(cat => (
                       <div key={cat}>
-                        <h4 className="text-[10px] font-orbitron mb-4 text-cyan-500 opacity-60 tracking-widest">{cat}</h4>
+                        <h4 className="text-[10px] font-orbitron mb-4 text-cyan-400 tracking-widest">{cat}</h4>
                         <div className="space-y-4">
                           {SKILLS.filter(s => s.category === cat).map(skill => (
                             <div key={skill.name}>
@@ -220,7 +222,7 @@ const App: React.FC = () => {
               <h2 className={`text-3xl font-orbitron font-black mb-8 tracking-wide ${theme === 'dark' ? 'text-cyan-400' : 'text-blue-700'}`}>
                 CONTACT
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-[fadeIn_0.5s_ease-out] max-w-5xl mx-auto">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 animate-[fadeIn_0.5s_ease-out] max-w-7xl mx-auto">
                 {/* Email Card */}
                 <div className={`group relative p-6 border ${theme === 'dark' ? 'border-cyan-500/20 hover:border-cyan-400 bg-cyan-900/10' : 'border-blue-500/20 hover:border-blue-500 bg-blue-50'} transition-all duration-300 overflow-hidden`}>
                   <div className="absolute top-0 right-0 px-2 py-0.5 bg-cyan-500/20 text-[8px] font-mono tracking-tighter text-cyan-400">
@@ -301,6 +303,58 @@ const App: React.FC = () => {
                     <div className="h-px w-full bg-cyan-400/50 absolute top-0 animate-[scanline_4s_linear_infinite]"></div>
                   </div>
                 </div>
+
+                {/* Resume Card */}
+                <div className={`group relative p-6 border ${theme === 'dark' ? 'border-cyan-500/20 hover:border-cyan-400 bg-cyan-900/10' : 'border-blue-500/20 hover:border-blue-500 bg-blue-50'} transition-all duration-300 overflow-hidden`}>
+                  <div className="absolute top-0 right-0 px-2 py-0.5 bg-cyan-500/20 text-[8px] font-mono tracking-tighter text-cyan-400">
+                    ID: 0004
+                  </div>
+                  
+                  <h3 className={`text-lg font-orbitron font-bold mb-2 tracking-wide ${theme === 'dark' ? 'text-cyan-300' : 'text-blue-800'}`}>
+                    Resume
+                  </h3>
+                  
+                  <p className={`text-sm mb-4 leading-relaxed ${theme === 'dark' ? 'text-cyan-100/70' : 'text-gray-600'}`}>
+                    feel free to view/download my resume.
+                  </p>
+                  
+                  <div className="flex items-center justify-between mt-auto pt-4 border-t border-cyan-500/10">
+                    <div className="flex items-center gap-3">
+                      <a
+                        href="/jarvix-portfolio/resume.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="View resume in new tab"
+                        className={`inline-flex items-center gap-2 px-4 py-2 rounded border transition-colors text-xs font-mono ${theme === 'dark' ? 'border-cyan-400 text-cyan-400 hover:bg-cyan-500/10' : 'border-blue-600 text-blue-600 hover:bg-blue-50'}`}
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5s8.268 2.943 9.542 7c-1.274 4.057-5.065 7-9.542 7s-8.268-2.943-9.542-7z" />
+                        </svg>
+                        <span>View</span>
+                      </a>
+
+                      <a
+                        href="/jarvix-portfolio/resume.pdf"
+                        download
+                        aria-label="Download resume"
+                        className={`inline-flex items-center gap-2 px-4 py-2 rounded border transition-colors text-xs font-mono ${theme === 'dark' ? 'border-cyan-400 text-cyan-400 hover:bg-cyan-500/10' : 'border-blue-600 text-blue-600 hover:bg-blue-50'}`}
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v12" />
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M7 12l5 5 5-5" />
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M21 21H3" />
+                        </svg>
+                        <span>Download</span>
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* Decorative Scanning Line for hover */}
+                  <div className="absolute inset-0 bg-cyan-400/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                    <div className="h-px w-full bg-cyan-400/50 absolute top-0 animate-[scanline_4s_linear_infinite]"></div>
+                  </div>
+                </div>
               </div>
               <br />
               <br />
@@ -352,6 +406,7 @@ const App: React.FC = () => {
       </button>
 
       <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} isDark={theme === 'dark'} />
+      <ProjectModal isOpen={!!selectedProject} project={selectedProject} onClose={() => setSelectedProject(null)} isDark={theme === 'dark'} />
       
       <style>{`
         @keyframes fadeIn {
