@@ -22,7 +22,7 @@ export const ProjectModal: React.FC<{
 
   const previewImage =
     project.image ||
-    (project.link && project.link !== '#' ? project.link : '/jarvix-portfolio/placeholder.png');
+    (project.link && project.link !== '#' ? project.link : 'Expense_Tracker.jpg');
 
   // Ensure spaces and special characters in filenames (like "Expense Tracker.png") are handled correctly
   const previewImageUrl = encodeURI(previewImage);

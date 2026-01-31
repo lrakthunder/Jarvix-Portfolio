@@ -15,7 +15,7 @@ export const PROJECTS: Project[] = [
     card_description: 'A modern expense tracking app using Laravel 11 + Vue 3 (Vite) with dashboards, charts, calendar tracking, and PDF/CSV reports.',
     description: `Thunder Expense Tracker is a modern multi‑page application built with Laravel 11 and Vue 3 (Vite) for fast local development and smooth client-side interactivity. It provides a polished, responsive dashboard with visual analytics, full CRUD for expenses and income, category management, and a calendar view for transaction tracking. The app includes a custom authentication UI, PDF/CSV reporting and preview capabilities, and a table-driven admin interface designed for easy data management and extensibility.`,
     tags: ["Vue", "PHP", "JavaScript", "CSS", "HTML", "Blade", "Batchfile", "MySQL"],
-    image: "/jarvix-portfolio/Expense_Tracker.jpg",
+    image: "Expense_Tracker.jpg",
     link: "https://dimgrey-bison-569365.hostingersite.com/",
     features: [
       'Responsive dashboard with summary cards for daily and monthly spending',
@@ -35,7 +35,7 @@ export const PROJECTS: Project[] = [
     title: "HOSPITAL APPOINTMENT SYSTEM",
     card_description: 'Patient and appointment management system with scheduling, assignment, and reporting.',
     description: `Hospital Appointment System is a staff-focused web application for managing patient records, scheduling appointments, and streamlining clinic workflows. The interface provides a searchable patient list, assignment indicators for assigned/unassigned patients, appointment time slots, and calendar-driven scheduling. Designed for clinic staff and administrators, it supports role-based access, quick editing of appointments, and reporting/export capabilities for operational use.`,
-    image: "/jarvix-portfolio/Hospital_Appointment_System.jpg",
+    image: "Hospital_Appointment_System.jpg",
     features: [
       'Searchable patient registry with assigned/unassigned status',
       'Flexible appointment scheduling with date/time slots and staff assignment',
@@ -58,7 +58,7 @@ export const PROJECTS: Project[] = [
     card_description: 'A modern expense tracking app using Laravel 11 + Vue 3 (Vite) with dashboards, charts, calendar tracking, and PDF/CSV reports.',
     description: "A tool to help users track their job applications and interviews in one place.",
     tags: ["TypeScript", "Batchfile", "CSS", "Javascript", "MySQL"],
-    image: "/jarvix-portfolio/Work_Journey.jpg",
+    image: "Work_Journey.jpg",
     link: "https://blanchedalmond-salamander-962993.hostingersite.com/",
     codeLink: "https://github.com/lrakthunder/Work-Journey",
     status: "COMPLETED"
