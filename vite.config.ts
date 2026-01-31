@@ -5,7 +5,8 @@ import react from '@vitejs/plugin-react';
 export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, '.', '');
     return {
-      base: '/jarvix-portfolio/',
+      // Use relative base so assets load correctly when deployed to any repo subpath
+      base: './',
       server: {
         port: 3000,
         host: '0.0.0.0',
