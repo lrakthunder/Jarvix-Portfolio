@@ -2,9 +2,27 @@
 import { GoogleGenAI } from "@google/genai";
 import { USER_BIO } from "../constants";
 
-const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_API_KEY || '' });
+const API_KEY = import.meta.env.VITE_API_KEY as string | undefined;
+let ai: GoogleGenAI | null = null;
+
+if (API_KEY && API_KEY.length > 0) {
+  try {
+    ai = new GoogleGenAI({ apiKey: API_KEY });
+  } catch (err) {
+    console.warn('Failed to initialize GoogleGenAI client:', err);
+    ai = null;
+  }
+} else {
+  console.warn('VITE_API_KEY is not set. Gemini API calls will be disabled in the client.');
+}
 
 export const askJarvis = async (query: string) => {
+  if (!ai) {
+    // Fail gracefully in the browser when no API key is present.
+    console.warn('askJarvis called but GoogleGenAI client is not initialized.');
+    return 'AI backend not configured. For local testing set VITE_API_KEY in a .env file or run a server-side proxy.';
+  }
+
   try {
     const response = await ai.models.generateContent({
       model: 'gemini-3-flash-preview',
@@ -19,7 +37,7 @@ export const askJarvis = async (query: string) => {
     });
     return response.text;
   } catch (error) {
-    console.error("JARVIS error:", error);
-    return "Error accessing core systems. Please check back later.";
+    console.error('JARVIS error:', error);
+    return 'Error accessing core systems. Please check back later.';
   }
 };
