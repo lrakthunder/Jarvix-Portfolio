@@ -322,7 +322,7 @@ const App: React.FC = () => {
                   <div className="flex items-center justify-between mt-auto pt-4 border-t border-cyan-500/10">
                     <div className="flex items-center gap-3">
                       <a
-                        href="/jarvix-portfolio/KGCPascual-Resume.pdf"
+                        href="/KGCPascual/KGCPascual-Resume.pdf"
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label="View resume in new tab"
@@ -336,7 +336,7 @@ const App: React.FC = () => {
                       </a>
 
                       <a
-                        href="/jarvix-portfolio/KGCPascual-Resume.pdf"
+                        href="/KGCPascual/KGCPascual-Resume.pdf"
                         download
                         aria-label="Download resume"
                         className={`inline-flex items-center gap-2 px-4 py-2 rounded border transition-colors text-xs font-mono ${theme === 'dark' ? 'border-cyan-400 text-cyan-400 hover:bg-cyan-500/10' : 'border-blue-600 text-blue-600 hover:bg-blue-50'}`}
