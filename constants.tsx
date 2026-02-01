@@ -128,6 +128,7 @@ export const SKILLS: Skill[] = [
   { name: "React / Next.js", level: 92, category: "FRONTEND" },
   { name: "MySQL / Database Design", level: 90, category: "BACKEND" },
   { name: "Git / Version Control", level: 90, category: "TOOLS" },
+  { name: "Docker", level: 90, category: "TOOLS" },
   { name: "VS Code Copilot", level: 90, category: "TOOLS" },
   { name: "NPM / PNPM", level: 90, category: "FRONTEND" },
   { name: "Composer", level: 90, category: "BACKEND" },

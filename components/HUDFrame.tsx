@@ -13,11 +13,11 @@ export const HUDFrame: React.FC<{ children: React.ReactNode, theme: 'dark' | 'li
       <div className={`absolute bottom-0 right-0 w-12 h-12 border-b-4 border-r-4 ${isDark ? 'border-cyan-400' : 'border-blue-600'}`}></div>
       
       {/* HUD Elements */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 px-8 py-2 bg-cyan-500/30 border-x border-b border-cyan-400/50 z-50">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 px-8 py-2 bg-cyan-500/30 border-x border-b border-cyan-400/50 z-50 hidden lg:block">
         <span className={`text-[10px] font-orbitron tracking-widest ${isDark ? 'text-cyan-300 font-bold' : 'text-blue-600 font-bold'}`}>SYSTEM STATUS: ACTIVE</span>
       </div>
 
-      <div className="flex-1 relative z-10 overflow-hidden flex flex-col pt-3">
+      <div className="flex-1 relative z-10 overflow-hidden flex flex-col pt-0 sm:pt-3">
         {children}
       </div>
 

@@ -68,7 +68,7 @@ const App: React.FC = () => {
       <div className="fixed inset-0 hologram-grid opacity-20 pointer-events-none"></div>
       <div className="scanline"></div>
 
-      <div className="w-full h-[90vh] relative z-20 pr-24">
+      <div className="w-full h-[90vh] relative z-20 pr-8 sm:pr-24">
         <HUDFrame theme={theme}>
           {/* Header Area */}
           <div className="flex flex-col md:flex-row items-center justify-between px-6 pt-4 border-b border-cyan-500/10">
@@ -76,7 +76,7 @@ const App: React.FC = () => {
               <h1 className={`text-2xl md:text-3xl font-orbitron font-black tracking-tighter ${theme === 'dark' ? 'text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]' : 'text-blue-700'}`}>
                 KARL PASCUAL <span className="text-xs font-light text-cyan-600/50">v4.0.2</span>
               </h1>
-              <span className="text-[10px] font-mono opacity-50">LOCATION: 7.097370° N, 124.867085° W</span>
+              <span className="hidden lg:block text-[10px] font-mono opacity-50 lg:opacity-80 lg:text-cyan-300">LOCATION: 7.097370° N, 124.867085° W</span>
             </div>
 
             <Navigation activeSection={activeSection} setActiveSection={setActiveSection} theme={theme} />
@@ -123,12 +123,13 @@ const App: React.FC = () => {
                          <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 bg-cyan-400"></div> Database Design & Optimization</li>
                          <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 bg-cyan-400"></div> UI/UX Implementation</li>
                          <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 bg-cyan-400"></div> Application Performance Tuning</li>
+                         <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 bg-cyan-400"></div> Beginner & Intermediate Programming Fundamentals</li>
                        </ul>
                     </div>
                     <div className={`p-4 border ${theme === 'dark' ? 'border-cyan-500/20 bg-cyan-900/10' : 'border-blue-200 bg-white'} rounded`}>
                        <span className="text-[10px] font-orbitron block mb-2 opacity-60">SYSTEM TELEMETRY</span>
                        <div className="space-y-4">
-                         {SKILLS.slice(0, 4).map(skill => (
+                         {SKILLS.slice(0, 5).map(skill => (
                            <div key={skill.name}>
                              <div className="flex justify-between text-[10px] mb-1 font-mono uppercase">
                                <span>{skill.name}</span>
@@ -321,7 +322,7 @@ const App: React.FC = () => {
                   <div className="flex items-center justify-between mt-auto pt-4 border-t border-cyan-500/10">
                     <div className="flex items-center gap-3">
                       <a
-                        href="/jarvix-portfolio/resume.pdf"
+                        href="/jarvix-portfolio/KGCPascual-Resume.pdf"
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label="View resume in new tab"
@@ -335,7 +336,7 @@ const App: React.FC = () => {
                       </a>
 
                       <a
-                        href="/jarvix-portfolio/resume.pdf"
+                        href="/jarvix-portfolio/KGCPascual-Resume.pdf"
                         download
                         aria-label="Download resume"
                         className={`inline-flex items-center gap-2 px-4 py-2 rounded border transition-colors text-xs font-mono ${theme === 'dark' ? 'border-cyan-400 text-cyan-400 hover:bg-cyan-500/10' : 'border-blue-600 text-blue-600 hover:bg-blue-50'}`}
@@ -399,10 +400,10 @@ const App: React.FC = () => {
       {/* Floating Comms Button */}
       <button 
         onClick={() => setIsContactOpen(true)}
-        className="fixed bottom-8 right-8 z-[60] w-16 h-16 rounded-full bg-cyan-500 flex items-center justify-center shadow-[0_0_20px_rgba(34,211,238,0.6)] hover:scale-110 transition-transform group"
+        className="fixed bottom-8 right-8 z-[60] w-8 h-8 md:w-16 md:h-16 rounded-full bg-cyan-500 flex items-center justify-center shadow-[0_0_20px_rgba(34,211,238,0.6)] hover:scale-110 transition-transform group"
       >
-        <svg className="w-8 h-8 text-white group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
-        <div className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full border-2 border-white animate-bounce"></div>
+        <svg className="w-4 h-4 md:w-8 md:h-8 text-white group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+        <div className="absolute -top-1 -right-1 w-2 h-2 md:w-4 md:h-4 bg-red-500 rounded-full border-2 border-white animate-bounce"></div>
       </button>
 
       <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} isDark={theme === 'dark'} />
